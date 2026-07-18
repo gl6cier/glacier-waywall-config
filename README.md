@@ -8,6 +8,7 @@ Config itself is tailored to 1920x1200, and of course to my own binds and settin
 *  No color coding, no filter mirrors (should be compatible with proposed filter ban, taken from nyachloe's config)
 *  Separate remaps toggle for pie chart
 *  Separate remaps in menu (F3 on side mouse in-game == chat + backspace on that button in menus) using state output
+  
 **Missing:**
 *  Some mirrors are off by like a couple of pixels and might not be that appealing, whenever I get around to it this'll be fixed though
 
