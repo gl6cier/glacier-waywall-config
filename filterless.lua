@@ -63,18 +63,27 @@ helpers.res_mirror({ src = { x = 248, y = 860, w = 26, h = 23 }, dst = { x = 114
 helpers.res_image(paths.overlay_png, { dst = { x = 0, y = 290, w = 768, h = 432 } }, 384, 16384) -- overlay image
 
 local resolutions = {
-    thin = helpers.toggle_res(340, 1080, 0),
-    tall = helpers.toggle_res(384, 16384, 0.2),
-    wide = helpers.toggle_res(1920, 270),
+    thin = helpers.ingame_only(helpers.toggle_res(340, 1080, 0)),
+    tall = helpers.ingame_only(helpers.toggle_res(384, 16384, 0.2)),
+    wide = helpers.ingame_only(helpers.toggle_res(1920, 270)),
     pre  = helpers.toggle_res(384, 16384, 0), -- preemptive
 }
 
 config.actions = {
-    ["*-Alt_L"] = function() return toggle_remaps and resolutions.thin() end,
-    ["*-T"] = function() return toggle_remaps and resolutions.tall() end,
-    ["*-G"] = function() return toggle_remaps and resolutions.wide() end,
-    ["*-N"] = function() return toggle_remaps and resolutions.pre() end, -- preemptive
-    ["*-Ctrl-P"] = waywall.toggle_fullscreen, --fullscreen
+    ["*-Alt_L"]  = function() 
+        if waywall.get_key("F3") then return false end
+        return toggle_remaps and resolutions.thin() end,
+    ["*-T"] = function() 
+        if waywall.get_key("F3") then return false end
+        return toggle_remaps and resolutions.tall() end,
+    ["*-G"] = function()
+        if waywall.get_key("F3") then return false end
+        return toggle_remaps and resolutions.wide() end,
+    ["*-N"] = function()
+        if waywall.get_key("F3") then return false end
+        return toggle_remaps and resolutions.pre() end, -- preemptive
+    
+        ["*-Ctrl-P"] = waywall.toggle_fullscreen, --fullscreen
 
     ["*-F2"] = function()
     if pierebind_text then
@@ -160,6 +169,7 @@ local oneshot = {
     key = "Shift-I",
     path = os.getenv("HOME") .. "/.config/waywall/resources/crosshair.png",
 }
+
 config.actions[oneshot.key] = function()
     if crosshair_image then
         crosshair_image:close(); crosshair_image = nil
