@@ -3,6 +3,7 @@
 Big thanks to [Gore's Generic Config](https://github.com/arjuncgore/waywall_generic_config) Nyachloe's no filter config linked in [Linuxcord](https://discord.gg/YyFKMnS59z) and both these people respectively for being a huge point of reference for writing this as I have 0 lua experience \^_^ 
 
 Config itself is tailored to 1920x1200, and of course to my own binds and settings but should be pretty easy to fix on any other resolution I'd like to think
+[My binds sheet for reference](https://docs.google.com/spreadsheets/d/1QRPFiZgoTsCYd5qxL3sP5MWv3aDwtkaxsymruXXnAHA/edit?gid=1749118649#gid=1749118649)
 
 **Main feature list:** 
 *  No color coding, no filter mirrors (should be compatible with proposed filter ban, taken from nyachloe's config)
