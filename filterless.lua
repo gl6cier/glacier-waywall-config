@@ -9,32 +9,32 @@ local menu_remaps = require("remaps").menu_kb -- remaps only in menu
 local toggle_remaps = true
 local ninbot_launched = false
 local pieremaps_active = false
-local pierebind_text = nil
+local pie_image = nil
 local rebind_text = nil
 
 local paths = {
 	background_png = waywall_config_path .. "resources/background.png",
 	overlay_png    = waywall_config_path .. "resources/stretched_overlay.png",
-	ninja_jar      = waywall_config_path .. "resources/Ninjabrain-Bot-1.5.1.jar",
+	ninja_jar      = waywall_config_path .. "resources/Ninjabrain-Bot-1.5.2.jar",
 }
 
 local config = {
     input = {
-        layout = "icelandic",
+        layout = "nynorsk",
         rules = nil,
         variant = "1",
         options = "caps:none",
 
-        repeat_rate = 80,
-        repeat_delay = 150,
+        repeat_rate = 145,
+        repeat_delay = 130,
         remaps = keyboard_remaps,
-        sensitivity = 8,
+        sensitivity = 15.5,
         confine_pointer = false,
     },
     theme = {
-        background_png = paths.background_png,
         font_path = "/usr/share/fonts/TTF/CozetteVector.ttf", -- waywall fork things
         font_size = 40,
+        cursor_icon = "/home/glacier/my-cursor.xcur",
         ninb_anchor = {
             position = "topright",
             x = 0,
@@ -44,29 +44,32 @@ local config = {
     experimental = {
         debug = false,
         jit = false,
-        tearing = true, -- tearing should be ON
+        tearing = true,
         scene_add_text = true,
     },
     window = {
-        fullscreen_width = 1920,
-        fullscreen_height = 1200,
+        fullscreen_width = 1280,
+        fullscreen_height = 800,
     }
 }
 
-helpers.res_mirror({ src = { x = 177, y = 7900, w = 30, h = 580 }, dst = { x = 0, y = 290, w = 768, h = 432 } }, 384, 16384) -- eyezoom
-helpers.res_mirror({ src = { x = 0, y = 15980, w = 320, h = 180 }, dst = { x = 1160, y = 570, w = 216, h = 122 } }, 384, 16384) -- tall pie
-helpers.res_mirror({ src = { x = 0, y = 680, w = 320, h = 180 }, dst = { x = 1145, y = 570, w = 216, h = 122 } }, 340, 1080) -- thin pie
-helpers.res_mirror({ src = { x = 12, y = 36, w = 38, h = 9 }, dst = { x = 1160, y = 300, w = 216, h = 54 } }, 384, 16384) -- tall ecount
-helpers.res_mirror({ src = { x = 12, y = 36, w = 38, h = 9 }, dst = { x = 1145, y = 300, w = 216, h = 54 } }, 340, 1080) -- thin ecount
-helpers.res_mirror({ src = { x = 292, y = 16164, w = 26, h = 23 }, dst = { x = 1160, y = 369, w = 216, h = 184 } }, 384, 16384) -- tall numbers
-helpers.res_mirror({ src = { x = 248, y = 860, w = 26, h = 23 }, dst = { x = 1145, y = 369, w = 216, h = 184 } }, 340, 1080) -- thin numbers
-helpers.res_image(paths.overlay_png, { dst = { x = 0, y = 290, w = 768, h = 432 } }, 384, 16384) -- overlay image
+helpers.res_mirror({ src = { x = 177, y = 7900, w = 30, h = 580 }, dst = { x = 0, y = 174, w = 461, h = 259 } }, 384, 16384) -- eyezoom
+helpers.res_mirror({ src = { x = 0, y = 15980, w = 320, h = 180 }, dst = { x = 850, y = 570, w = 216, h = 122 } }, 384, 16384) -- tall pie
+helpers.res_mirror({ src = { x = 0, y = 400, w = 320, h = 180 }, dst = { x = 850, y = 570, w = 216, h = 122 } }, 340, 800) -- thin pie
+helpers.res_mirror({ src = { x = 12, y = 36, w = 38, h = 9 }, dst = { x = 850, y = 300, w = 216, h = 54 } }, 384, 16384) -- tall ecount
+helpers.res_mirror({ src = { x = 12, y = 36, w = 38, h = 9 }, dst = { x = 850, y = 300, w = 216, h = 54 } }, 340, 800) -- thin ecount
+helpers.res_mirror({ src = { x = 292, y = 16164, w = 26, h = 23 }, dst = { x = 850, y = 369, w = 216, h = 184 } }, 384, 16384) -- tall numbers
+helpers.res_mirror({ src = { x = 248, y = 580, w = 26, h = 23 }, dst = { x = 850, y = 369, w = 216, h = 184 } }, 340, 800) -- thin numbers
+helpers.res_image(paths.overlay_png, { dst = { x = 0, y = 174, w = 461, h = 259 } }, 384, 16384) -- overlay image
+helpers.res_mirror({ src = { x = 12, y = 36, w = 38, h = 9 }, dst = { x = 850, y = 300, w = 216, h = 54 } }, 383, 16384) -- preemptive ecount
+helpers.res_mirror({ src = { x = 0, y = 15980, w = 320, h = 180 }, dst = { x = 850, y = 570, w = 216, h = 122 } }, 383, 16384) -- preemptive pie
+helpers.res_mirror({ src = { x = 292, y = 16164, w = 26, h = 23 }, dst = { x = 850, y = 369, w = 216, h = 184 } }, 383, 16384) -- PREEMPTIVE numbers
 
 local resolutions = {
-    thin = helpers.ingame_only(helpers.toggle_res(340, 1080, 0)),
+    thin = helpers.ingame_only(helpers.toggle_res(340, 800, 0)),
     tall = helpers.ingame_only(helpers.toggle_res(384, 16384, 0.2)),
-    wide = helpers.ingame_only(helpers.toggle_res(1920, 270)),
-    pre  = helpers.toggle_res(384, 16384, 0), -- preemptive
+    wide = helpers.ingame_only(helpers.toggle_res(1280, 270)),
+    pre  = helpers.toggle_res(383, 16384, 0), -- preemptive
 }
 
 config.actions = {
@@ -86,9 +89,9 @@ config.actions = {
         ["*-Ctrl-P"] = waywall.toggle_fullscreen, --fullscreen
 
     ["*-F2"] = function()
-    if pierebind_text then
-        pierebind_text:close()
-        pierebind_text = nil
+    if pie_image then
+        pie_image:close()
+        pie_image = nil
     end
 
     if pieremaps_active then
@@ -97,13 +100,15 @@ config.actions = {
     else
         pieremaps_active = true
         waywall.set_remaps(pie_remaps)
-
-        pierebind_text = waywall.text("pie lock", {
-            x = 960,
-            y = 600,
-            color = "#FFFFFF",
-            size = 40
+        pie_image = waywall.image("/home/glacier/.config/waywall/resources/unlock.png", {
+            dst = {
+                    x = 608,
+                    y = 50,
+                    w = 64,
+                    h = 64,
+            },
         })
+        
     end
 end,
 
@@ -148,7 +153,36 @@ end,
       helpers.toggle_floating()
     end
 end,
+
+    ["*-Ctrl-1"] = function()
+    waywall.press_key("1")
+    return true
+    end,
+
+    ["*-Ctrl-2"] = function()
+    waywall.press_key("2")
+    return true
+    end,
+
+    ["*-Ctrl-3"] = function()
+    waywall.press_key("3")
+    return true
+    end,
+
+    ["*-Ctrl-4"] = function()
+    waywall.press_key("4")
+    return true
+    end,
+
+    ["*-Ctrl-5"] = function()
+    waywall.press_key("5")
+    return true
+    end
+    
 }
+
+local crosshair_image = nil
+local crosshair_active = nil
 
 waywall.listen("state", function() -- change from menu_remaps to keyboard_remaps when in a menu
     local state = waywall.state()
@@ -159,12 +193,9 @@ waywall.listen("state", function() -- change from menu_remaps to keyboard_remaps
     end
 end)
 
-local crosshair_image = nil
-local crosshair_active = nil
-
 local oneshot = {
-    resx = 1920,
-    resy = 1200,
+    resx = 1280,
+    resy = 800,
     size = 100,
     key = "Shift-I",
     path = os.getenv("HOME") .. "/.config/waywall/resources/crosshair.png",
@@ -189,7 +220,7 @@ config.actions[oneshot.key] = function()
     end
 end
 
--- TWITCH CHAT FORK. FILES NOT PROVIDED !!!!!!!
+-- TWITCH CHAT FORK
 
    local emote_downloader = require("fetch_emotes")
    local chat = require("chat")
