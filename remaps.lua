@@ -7,8 +7,6 @@ return {
         ["9"] = "F3",
         ["F3"] = "9",
         ["Home"] = "8",
-        ["E"] = "C",
-        ["C"] = "E",        
         ["0"] = "F1",
         ["F1"] = "0",
         ["O"] = "1",
@@ -21,6 +19,10 @@ return {
         ["4"] = "K",
         ["A"] = "M",
         ["M"] = "A",
+        ["D"] = "I",
+        ["I"] = "D",
+        ["Q"] = "Backspace",
+        ["Backspace"] = "Q",
 --holy remaps
 
 
@@ -31,11 +33,9 @@ menu_kb = {
         ["CapsLock"] = "RIGHTSHIFT",
         ["RIGHTSHIFT"] = "CapsLock",
         ["8"] = "Home",
-        ["9"] = "Backspace",
+        ["9"] = "F3",
         ["F3"] = "9",
         ["Home"] = "8",
-        ["E"] = "C",
-        ["C"] = "E",        
         ["0"] = "F1",
         ["F1"] = "0",
         ["O"] = "1",
@@ -48,7 +48,10 @@ menu_kb = {
         ["4"] = "K",
         ["A"] = "M",
         ["M"] = "A",
---holy remaps
+        ["D"] = "I",
+        ["I"] = "D",
+        ["Q"] = "Backspace",
+        ["Backspace"] = "Q",
 
 
     },
